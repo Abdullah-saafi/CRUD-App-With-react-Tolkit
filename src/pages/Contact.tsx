@@ -11,7 +11,6 @@ import {
 const Contact: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle form submission
   };
 
   return (

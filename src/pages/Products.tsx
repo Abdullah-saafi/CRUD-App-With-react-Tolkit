@@ -9,8 +9,9 @@ import {
   Button,
   Box,
   IconButton,
+  Chip,
 } from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
+import { Add, Remove, AccessTime } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setProducts,
@@ -25,31 +26,48 @@ const Products: React.FC = () => {
   const { products, cart } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
-    // Simulate fetching products
     const mockProducts: Product[] = [
       {
         id: 1,
-        name: "Product 1",
-        price: 29.99,
-        description: "High-quality product with amazing features",
+        name: "Web Development Bootcamp",
+        duration: "56 hours",
+        description: "Complete course to become a full-stack developer",
+        level: "Beginner",
       },
       {
         id: 2,
-        name: "Product 2",
-        price: 49.99,
-        description: "Premium product with advanced technology",
+        name: "Data Science Masterclass",
+        duration: "72 hours",
+        description: "Learn data analysis, visualization and machine learning",
+        level: "Intermediate",
       },
       {
         id: 3,
-        name: "Product 3",
-        price: 19.99,
-        description: "Affordable and reliable product",
+        name: "UI/UX Design Fundamentals",
+        duration: "40 hours",
+        description: "Master user interface and experience design principles",
+        level: "Beginner",
       },
       {
         id: 4,
-        name: "Product 4",
-        price: 79.99,
-        description: "Luxury product with exceptional quality",
+        name: "Advanced JavaScript Concepts",
+        duration: "35 hours",
+        description: "Deep dive into modern JavaScript and frameworks",
+        level: "Advanced",
+      },
+      {
+        id: 5,
+        name: "Cloud Computing Essentials",
+        duration: "45 hours",
+        description: "Learn AWS, Azure and Google Cloud platforms",
+        level: "Intermediate",
+      },
+      {
+        id: 6,
+        name: "Mobile App Development",
+        duration: "60 hours",
+        description: "Build iOS and Android apps with React Native",
+        level: "Intermediate",
       },
     ];
     dispatch(setProducts(mockProducts));
@@ -73,11 +91,34 @@ const Products: React.FC = () => {
     }
   };
 
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case "Beginner":
+        return "success";
+      case "Intermediate":
+        return "warning";
+      case "Advanced":
+        return "error";
+      default:
+        return "default";
+    }
+  };
+
   return (
     <Container sx={{ py: 4, pb: 8 }}>
-      <Typography variant="h4" gutterBottom>
-        Products
+      <Typography variant="h3" align="center" gutterBottom fontWeight="bold">
+        Available Courses
       </Typography>
+      <Typography
+        variant="h6"
+        align="center"
+        color="textSecondary"
+        paragraph
+        sx={{ mb: 4 }}
+      >
+        Browse our selection of learning programs
+      </Typography>
+
       <Grid container spacing={3}>
         {products.map((product) => {
           const cartItem = getCartItem(product.id);
@@ -90,19 +131,56 @@ const Products: React.FC = () => {
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
+                  transition: "transform 0.2s, box-shadow 0.2s",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: 6,
+                  },
                 }}
               >
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6" gutterBottom>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      mb: 2,
+                    }}
+                  >
+                    {product.level && (
+                      <Chip
+                        label={product.level}
+                        size="small"
+                        color={getLevelColor(product.level)}
+                        variant="outlined"
+                      />
+                    )}
+                  </Box>
+
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{ fontWeight: "bold", minHeight: "64px" }}
+                  >
                     {product.name}
                   </Typography>
-                  <Typography color="primary" variant="h6" gutterBottom>
-                    ${product.price.toFixed(2)}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
+
+                  <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                    <AccessTime sx={{ mr: 1, color: "primary.main" }} />
+                    <Typography color="primary" variant="h6" fontWeight="bold">
+                      {product.duration}
+                    </Typography>
+                  </Box>
+
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    sx={{ mb: 2 }}
+                  >
                     {product.description}
                   </Typography>
                 </CardContent>
+
                 <CardActions>
                   <Box
                     display="flex"
@@ -115,13 +193,17 @@ const Products: React.FC = () => {
                         size="small"
                         onClick={() => handleQuantityChange(product, -1)}
                         disabled={quantity === 0}
+                        color="primary"
                       >
                         <Remove />
                       </IconButton>
-                      <Typography sx={{ mx: 2 }}>{quantity}</Typography>
+                      <Typography sx={{ mx: 2, fontWeight: "bold" }}>
+                        {quantity}
+                      </Typography>
                       <IconButton
                         size="small"
                         onClick={() => handleQuantityChange(product, 1)}
+                        color="primary"
                       >
                         <Add />
                       </IconButton>
@@ -131,8 +213,9 @@ const Products: React.FC = () => {
                       color="primary"
                       variant={quantity > 0 ? "outlined" : "contained"}
                       onClick={() => handleQuantityChange(product, 1)}
+                      sx={{ borderRadius: 2 }}
                     >
-                      {quantity > 0 ? "Add More" : "Add to Cart"}
+                      {quantity > 0 ? "Add More" : "Enroll Now"}
                     </Button>
                   </Box>
                 </CardActions>

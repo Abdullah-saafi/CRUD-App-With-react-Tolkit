@@ -9,20 +9,22 @@ const About: React.FC = () => {
           About Us
         </Typography>
         <Typography variant="body1" paragraph>
-          Welcome to our React TypeScript application! This project demonstrates
-          modern web development practices using React, TypeScript, Redux
-          Toolkit, React Router, and Material-UI.
+          Welcome to Baitussalam Tech Park! We are a hub of innovation and
+          learning, dedicated to empowering students and professionals with the
+          latest skills in modern web and software development. Our projects and
+          training programs focus on real-world applications, hands-on coding,
+          and industry-standard tools.
         </Typography>
         <Box sx={{ mt: 3 }}>
           <Typography variant="h6" gutterBottom>
-            Technologies Used:
+            Technologies & Skills We Focus On:
           </Typography>
           <ul>
-            <li>React 18 with TypeScript</li>
-            <li>Redux Toolkit for state management</li>
-            <li>React Router for navigation</li>
-            <li>Material-UI for components and styling</li>
-            <li>Vite for fast development and building</li>
+            <li>PSDC Professional software development course</li>
+            <li>Graphics Designing</li>
+            <li>Amazone</li>
+            <li>Web development</li>
+            <li>Shopify</li>
           </ul>
         </Box>
       </Paper>

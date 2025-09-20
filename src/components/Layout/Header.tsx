@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My React TS App
+          Baitussalam Student Portal
         </Typography>
         <Box display="flex" alignItems="center">
           <Switch
